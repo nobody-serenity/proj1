@@ -4177,7 +4177,69 @@ static const vector<pie_effect> pie_effects = {
                 you.increase_duration(DUR_FIRE_VULN, 15 + random2(11), 50);
             }
         },
-        6
+        6 //change weight to check for you.zot_orb_monster
+    },
+    {
+        "cherryIce",
+        [](const actor &defender) {
+            return defender.is_player() || defender.res_cold() < 3;
+        },
+        [](actor &defender, const bolt &beam) {
+            if (defender.is_monster())
+            {
+                monster *mons = defender.as_monster();
+                simple_monster_message(*mons,
+                        " looks more vulnerable to cold.");
+                mons->add_ench(mon_enchant(ENCH_COLD_VULN, 0, //no such thing as COLD_VULN
+                             beam.agent(),
+                             15 + random2(11) * BASELINE_DELAY));
+            }
+            else
+            {
+                if (you.duration[DUR_COLD_VULN])
+                {
+                    mpr("You feel your vulnerability to cold will last "
+                        "longer.");
+                }
+                else
+                    mpr("Fruit-coloured shards freeze away your cold "
+                        "resistance!");
+
+                you.increase_duration(DUR_COLD_VULN, 15 + random2(11), 50);
+            }
+        },
+        6 //change weight to check for you.zot_orb_monster
+    },
+    {
+        "cherryNeg",
+        [](const actor &defender) {
+            return defender.is_player() || defender.res_corr() < 1;
+        },
+        [](actor &defender, const bolt &beam) {
+            if (defender.is_monster())
+            {
+                monster *mons = defender.as_monster();
+                simple_monster_message(*mons,
+                        " looks more vulnerable to corrosion.");
+                mons->add_ench(mon_enchant(ENCH_CORR_VULN, 0, //no such thing as CORR_VULN
+                             beam.agent(),
+                             15 + random2(11) * BASELINE_DELAY));
+            }
+            else
+            {
+                if (you.duration[DUR_CORR_VULN])
+                {
+                    mpr("You feel your vulnerability to corrosion will last "
+                        "longer.");
+                }
+                else
+                    mpr("Cherry-coloured flames melt away your corrosion "
+                        "resistance!");
+
+                you.increase_duration(DUR_CORR_VULN, 15 + random2(11), 50);
+            }
+        },
+        6 //change weight to check for you.zot_orb_monster
     },
     {
         "peanut brittle",
