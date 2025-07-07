@@ -785,6 +785,16 @@ void monster::remove_enchantment_effect(const mon_enchant &me, bool quiet)
             simple_monster_message(*this, " is no longer more vulnerable to fire.");
         break;
 
+    case ENCH_COLD_VULN:
+        if (!quiet)
+            simple_monster_message(*this, " is no longer more vulnerable to cold.");
+        break;
+
+    case ENCH_CORR_VULN:
+        if (!quiet)
+            simple_monster_message(*this, " is no longer more vulnerable to corrosion.");
+        break;
+
     case ENCH_MERFOLK_AVATAR_SONG:
         props.erase(MERFOLK_AVATAR_CALL_KEY);
         break;
@@ -1428,6 +1438,8 @@ void monster::apply_enchantment(const mon_enchant &me)
     case ENCH_SCREAMED:
     case ENCH_WEAK:
     case ENCH_FIRE_VULN:
+    case ENCH_COLD_VULN:
+    case ENCH_CORR_VULN:
     case ENCH_BARBS:
     case ENCH_POISON_VULN:
     case ENCH_DIMENSION_ANCHOR:
@@ -2182,8 +2194,11 @@ static const char *enchant_names[] =
     "grasping_roots_source",
 #endif
     "grasping_roots",
-    "spell_charged", "fire_vuln", "polar_vortex_cooldown", "merfolk_avatar_song",
-    "barbs",
+    "spell_charged", "fire_vuln", 
+#if TAG_MAJOR_VERSION == 34
+    "cold_vuln", "corr_vuln",
+#endif
+    "polar_vortex_cooldown", "merfolk_avatar_song", "barbs",
 #if TAG_MAJOR_VERSION == 34
     "building_charge",
 #endif
