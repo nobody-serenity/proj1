@@ -3708,6 +3708,9 @@ int monster::res_cold() const
             u++;
     }
 
+    if (has_ench(ENCH_COLD_VULN))
+        u--;
+    
     if (has_ench(ENCH_RESISTANCE))
         u++;
 
