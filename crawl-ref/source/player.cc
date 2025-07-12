@@ -1386,19 +1386,22 @@ int player_res_cold(bool allow_random, bool temp, bool items)
 
 int player_res_corrosion(bool allow_random, bool temp, bool items)
 {
+
+    int rcorr = 0;
+ 
     if (temp && you.duration[DUR_RESISTANCE])
-        return 1;
+        rcorr = 1;
 
     if (cur_form(temp)->res_corr())
-        return 1;
+        rcorr = 1;
 
     if (have_passive(passive_t::resist_corrosion))
-        return 1;
+        rcorr = 1;
 
     if (you.get_mutation_level(MUT_ACID_RESISTANCE)
         || you.get_mutation_level(MUT_YELLOW_SCALES) >= 3)
     {
-        return 1;
+        rcorr = 1;
     }
 
     if (items)
@@ -1408,15 +1411,17 @@ int player_res_corrosion(bool allow_random, bool temp, bool items)
             || you.wearing_jewellery(RING_RESIST_CORROSION)
             || you.wearing_ego(OBJ_ARMOUR, SPARM_PRESERVATION))
         {
-            return 1;
+           rcorr = 1;
         }
 
         // dragonskin cloak: 0.5 to draconic resistances
         if (allow_random && you.unrand_equipped(UNRAND_DRAGONSKIN) && coinflip())
-            return 1;
+           rcorr = 1;
     }
 
-    return 0;
+    if (temp && you.duration[DUR_CORR_VULN])
+        rcorr--;
+    return rcorr;
 }
 
 int player_res_electricity(bool allow_random, bool temp, bool items)
