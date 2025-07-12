@@ -4180,7 +4180,7 @@ static const vector<pie_effect> pie_effects = {
         6 //change weight to check for you.zot_orb_monster
     },
     {
-        "cherryIce",
+        "vanilla",
         [](const actor &defender) {
             return defender.is_player() || defender.res_cold() < 3;
         },
@@ -4202,8 +4202,8 @@ static const vector<pie_effect> pie_effects = {
                         "longer.");
                 }
                 else
-                    mpr("Fruit-coloured shards freeze away your cold "
-                        "resistance!");
+                    mpr("Vanilla-flavoured frosting chills away your "
+                        "cold resistance!");
 
                 you.increase_duration(DUR_COLD_VULN, 15 + random2(11), 50);
             }
@@ -4211,7 +4211,7 @@ static const vector<pie_effect> pie_effects = {
         6 //change weight to check for you.zot_orb_monster
     },
     {
-        "cherryNeg",
+        "pineapple",
         [](const actor &defender) {
             return defender.is_player() || defender.res_corr() < 1;
         },
@@ -4229,12 +4229,12 @@ static const vector<pie_effect> pie_effects = {
             {
                 if (you.duration[DUR_CORR_VULN])
                 {
-                    mpr("You feel your vulnerability to corrosion will last "
-                        "longer.");
+                    mpr("You feel your vulnerability to corrosion will "
+                        "last longer.");
                 }
                 else
-                    mpr("Cherry-coloured flames melt away your corrosion "
-                        "resistance!");
+                    mpr("Pineapple-shaped splashes melt away your "
+                        "corrosion resistance!");
 
                 you.increase_duration(DUR_CORR_VULN, 15 + random2(11), 50);
             }
