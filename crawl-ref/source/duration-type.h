@@ -155,6 +155,10 @@ enum duration_type
     DUR_SLEEP_IMMUNITY,
 #endif
     DUR_FIRE_VULN,
+#if TAG_MAJOR_VERSION == 34
+    DUR_COLD_VULN,
+    DUR_CORR_VULN,
+#endif
     DUR_ELIXIR,
 #if TAG_MAJOR_VERSION == 34
     DUR_ELIXIR_MAGIC,
