@@ -1374,10 +1374,12 @@ int player_res_cold(bool allow_random, bool temp, bool items)
     rc += you.get_mutation_level(MUT_ICY_BLUE_SCALES, temp) == 3 ? 1 : 0;
     rc += you.get_mutation_level(MUT_SHAGGY_FUR, temp) == 3 ? 1 : 0;
 
+    if (rc > 3)
+        rc = 3;
+    if (temp && you.duration[DUR_COLD_VULN])
+        rf--;
     if (rc < -3)
         rc = -3;
-    else if (rc > 3)
-        rc = 3;
 
     return rc;
 }
